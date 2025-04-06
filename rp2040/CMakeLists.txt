@@ -1,6 +1,6 @@
 set(CMAKE_SYSTEM_NAME Generic)
 
-# User configuration section starts here
+# User configuration section starts here test
 
 # Some boards, such as the first Adafruit revisions, may have trouble booting properly
 # due to bad componets used in the design.
