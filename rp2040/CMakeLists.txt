@@ -1,24 +1,18 @@
 set(CMAKE_SYSTEM_NAME Generic)
-
-# User configuration section starts here test
+# User configuration section starts here
 
 # Some boards, such as the first Adafruit revisions, may have trouble booting properly
-# due to bad componets used in the design.
+# due to bad components used in the design.
 # Turn this setting to ON if your rp2040 is not detected after firmware upload and reset
 set(BOOT_WORKAROUND ON)
 
 # Default output data pin for the non-SPI LED strips (only for sk6812/ws2812b)
-# This is ignored for Scorpio; output 0 (GPIO16) is used by default
 set(OUTPUT_DATA_PIN 14)
 
-# Enable second segment, starting at index 104
+# Use multi-segment, starting index of second led strip or OFF to disable
 set(SECOND_SEGMENT_INDEX 104)
-
-# Use GPIO17 (Scorpio output 1) for the second segment
 set(SECOND_SEGMENT_DATA_PIN 17)
-
-# Set to ON if second segment is reversed
-set(SECOND_SEGMENT_REVERSED OFF)
+set(SECOND_SEGMENT_REVERSED ON)  # Enable reverse layout
 
 # HyperSPI communication interface with Raspberry Pi
 set(OUTPUT_SPI_DATA_PIN 4)
@@ -73,18 +67,13 @@ pico_sdk_init()
 
 set(PICO_PROGRAM_MAIN_ENTRY "../hyperspi.cpp")
 set(DISABLE_SPI_LEDS ON)
-
-# Add compile-time definitions
 add_definitions(
-    -DSPI_INTERFACE=${OUTPUT_SPI_INTERFACE}
-    -DSPI_DATA_PIN=${OUTPUT_SPI_DATA_PIN}
-    -DSPI_CLOCK_PIN=${OUTPUT_SPI_CLOCK_PIN}
-    -DSPI_CHIP_SELECT=${OUTPUT_SPI_CHIP_SELECT}
-    -DNEOPIXEL_RGBW
-    -DNEUTRAL_WHITE
-    -DSECOND_SEGMENT_START_INDEX=${SECOND_SEGMENT_INDEX}
-    -DSECOND_SEGMENT_DATA_PIN=${SECOND_SEGMENT_DATA_PIN}
-    -DSECOND_SEGMENT_REVERSED=${SECOND_SEGMENT_REVERSED}
+	-DSPI_INTERFACE=${OUTPUT_SPI_INTERFACE}
+	-DSPI_DATA_PIN=${OUTPUT_SPI_DATA_PIN}
+	-DSPI_CLOCK_PIN=${OUTPUT_SPI_CLOCK_PIN}
+	-DSPI_CHIP_SELECT=${OUTPUT_SPI_CHIP_SELECT}
+	-DSECOND_SEGMENT_START_INDEX=${SECOND_SEGMENT_INDEX}
+	-DSECOND_SEGMENT_DATA_PIN=${SECOND_SEGMENT_DATA_PIN}
+	-DSECOND_SEGMENT_REVERSED=${SECOND_SEGMENT_REVERSED}
 )
-
 add_subdirectory(HyperSerialPico)
