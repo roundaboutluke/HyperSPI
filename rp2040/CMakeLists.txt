@@ -10,7 +10,7 @@ set(BOOT_WORKAROUND ON)
 set(OUTPUT_DATA_PIN 14)
 
 # Use multi-segment, starting index of second led strip or OFF to disable
-set(SECOND_SEGMENT_INDEX 106)
+set(SECOND_SEGMENT_INDEX 109)
 set(SECOND_SEGMENT_DATA_PIN 17)
 set(SECOND_SEGMENT_REVERSED ON)  # Enable reverse layout
 
